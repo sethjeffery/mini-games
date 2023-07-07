@@ -1,5 +1,6 @@
+import clsx from 'clsx'
 import { Set } from 'immutable'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 function calculateScore(words: Set<string>) {
   // 3 letters = 1 point
@@ -9,6 +10,8 @@ function calculateScore(words: Set<string>) {
 }
 
 function BoggleWordsList({ words }: { words: Set<string> }) {
+  const [bestScore, setBestScore] = useState(0)
+
   const groupedByCount = useMemo(() => {
     const grouped: string[][] = []
     words.forEach((word) => {
@@ -21,9 +24,29 @@ function BoggleWordsList({ words }: { words: Set<string> }) {
 
   const score = useMemo(() => calculateScore(words), [words])
 
+  useMemo(() => {
+    const storedScore = localStorage.getItem('boggle-best-score')
+    if (score > bestScore) {
+      localStorage.setItem('boggle-best-score', score.toString())
+      setBestScore(score)
+    } else if (!bestScore && storedScore) {
+      setBestScore(parseInt(storedScore))
+    }
+  }, [score, bestScore])
+
   return (
     <div className="border-l bg-white p-12 w-[300px] overflow-y-auto max-h-screen">
-      <div className="font-mono text-8xl text-gray-300 mb-6">{score}</div>
+      <div className="font-mono text-8xl text-gray-400 mb-6">{score}</div>
+      {bestScore && (
+        <div
+          className={clsx(
+            'font-grandstander text-xl mb-6',
+            score === bestScore ? 'text-yellow-600' : 'text-gray-300',
+          )}
+        >
+          Best: {bestScore}
+        </div>
+      )}
 
       {groupedByCount.map(
         (group, letterCount) =>
