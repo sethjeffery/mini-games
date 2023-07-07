@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { Set } from 'immutable'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 function calculateScore(words: Set<string>) {
   // 3 letters = 1 point
@@ -24,7 +24,7 @@ function BoggleWordsList({ words }: { words: Set<string> }) {
 
   const score = useMemo(() => calculateScore(words), [words])
 
-  useMemo(() => {
+  useEffect(() => {
     const storedScore = localStorage.getItem('boggle-best-score')
     if (score > bestScore) {
       localStorage.setItem('boggle-best-score', score.toString())
