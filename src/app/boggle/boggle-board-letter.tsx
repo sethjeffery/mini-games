@@ -1,5 +1,5 @@
 import { BoggleLetter } from '@/types/letter'
-import clsx from 'clsx'
+import ScrabbleLetter from '../scrabble-letter'
 import useBoggleBoardLetter from './hooks/use-boggle-board-letter'
 
 interface BoggleLetterProps {
@@ -24,21 +24,14 @@ function BoggleBoardLetter({
   )
 
   return (
-    <div
-      className={clsx(
-        'font-mono rounded border-2 border-dotted border-transparent w-16 h-16 text-3xl flex items-center justify-center',
-        canClick &&
-          !selected &&
-          'hover:border-blue-200 hover:bg-blue-50 cursor-pointer',
-        !canClick && !selected && 'pointer-events-none opacity-50',
-        !selected && canClick && selectedLetters.length > 0 && 'bg-blue-50',
-        selected
-          ? 'bg-yellow-300 hover:bg-yellow-400 cursor-pointer shadow-[0_2px_0_#caa757]'
-          : 'bg-[#f4ead3] shadow-[0_2px_0_#ddc690]',
-      )}
-    >
-      {letter}
-    </div>
+    <ScrabbleLetter
+      width={16}
+      depth={2}
+      letter={letter}
+      hover={canClick && !selected}
+      selected={selected}
+      disabled={!canClick && !selected}
+    />
   )
 }
 

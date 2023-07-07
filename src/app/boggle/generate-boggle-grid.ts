@@ -21,10 +21,13 @@ function generateBoggleGrid(size: 4 | 5 = 4): Grid {
     .fill(null)
     .map(() => Array(size).fill(' '))
 
-  const points = getPointsRandomly(size)
+  const dicePoints = getPointsRandomly(boggleDice.en.length)
+  const gridPoints = getPointsRandomly(size)
 
-  for (let [i, j] of points) {
-    grid[i][j] = randomElement(boggleDice.en[i][j].split(''))
+  for (let i = 0; i < gridPoints.length; i++) {
+    const [gx, gy] = gridPoints[i]
+    const [dx, dy] = dicePoints[i]
+    grid[gx][gy] = randomElement(boggleDice.en[dx][dy].split(''))
   }
 
   return grid
