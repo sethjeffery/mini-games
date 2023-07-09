@@ -18,6 +18,9 @@ export default function Home() {
         <li>
           <ButtonLink href="/boggle">Boggle</ButtonLink>
         </li>
+        <li>
+          <ButtonLink href="/wordfall">Wordfall</ButtonLink>
+        </li>
       </ul>
     </main>
   )

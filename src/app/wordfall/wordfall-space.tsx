@@ -15,12 +15,18 @@ const WordfallSpace = ({
   onStart: () => void
 }) => {
   const [playedOnce, setPlayedOnce] = useState(false)
+  const [highScore, setHighScore] = useState(0)
 
   useEffect(() => {
     if (state === 'gameover') setPlayedOnce(true)
   }, [state])
 
-  const highScore = parseInt(localStorage.getItem('wordfall-high-score') || '0')
+  useEffect(() => {
+    if (highScore < score) {
+      setHighScore(parseInt(localStorage.getItem('wordfall-high-score') || '0'))
+    }
+  }, [score, highScore])
+
   const title = playedOnce ? 'GAME OVER' : 'WORD FALL'
   const playText = playedOnce ? 'PLAY AGAIN' : 'PLAY'
 
