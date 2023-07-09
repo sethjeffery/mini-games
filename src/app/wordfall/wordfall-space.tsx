@@ -23,7 +23,12 @@ const WordfallSpace = ({
 
   useEffect(() => {
     if (highScore < score) {
-      setHighScore(parseInt(localStorage.getItem('wordfall-high-score') || '0'))
+      setHighScore(
+        Math.max(
+          score,
+          parseInt(localStorage.getItem('wordfall-high-score') || '0'),
+        ),
+      )
     }
   }, [score, highScore])
 
