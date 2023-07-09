@@ -156,7 +156,7 @@ class GameStateUpdater {
         word.y = MAX_DISTANCE
         word.dead = true
         this.lives = Math.max(this.lives - 1, 0)
-        this.level = Math.floor(this.level * 0.66)
+        this.level = Math.floor(this.level * 0.5)
         if (this.lives <= 0) this.endGame()
       }
     })
