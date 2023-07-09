@@ -33,7 +33,8 @@ function ScrabbleLetter({
           !selected &&
           'hover:border-blue-200 hover:bg-blue-50 cursor-pointer',
         !hover && !selected && 'pointer-events-none',
-        selected && 'bg-yellow-300 hover:bg-yellow-400 cursor-pointer',
+        selected && 'bg-yellow-300',
+        selected && hover && 'hover:bg-yellow-400 cursor-pointer',
         selected && depth === 2 && 'shadow-[0_2px_0_#c29325]',
         selected && depth === 4 && 'shadow-[0_4px_0_#c29325]',
 

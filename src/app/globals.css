@@ -21,3 +21,35 @@ body {
   background: linear-gradient(to bottom, transparent, var(--background-end))
     var(--background-start);
 }
+
+.explosion {
+  pointer-events: none;
+  z-index: 1;
+  position: relative;
+
+  .particle {
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    width: var(--p-size, 10px);
+    height: var(--p-size, 10px);
+    background: var(--p-color, rgb(202, 124, 14));
+    border-radius: 50%;
+    animation: pop var(--p-duration, 0.4s) forwards ease-out;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 1;
+    transform: translateY(-50%) translateX(-50%) rotate(var(--p-rotate, 0))
+      scaleY(var(--p-squash, 0.2)) translateX(50%);
+    visibility: visible;
+  }
+  to {
+    opacity: 0.5;
+    transform: translateY(-50%) translateX(-50%) rotate(var(--p-rotate, 0))
+      scaleY(var(--p-squash, 0.2)) translateX(var(--p-distance, 50%));
+    visibility: hidden;
+  }
+}
